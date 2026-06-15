@@ -30,7 +30,8 @@ export default function Home() {
               text-6xl
               md:text-7xl
               font-black
-              tracking-[-0.08em]
+              tracking-[-0.03em]
+              leading-[1]
               leading-[0.9]
               font-sugo
             "
