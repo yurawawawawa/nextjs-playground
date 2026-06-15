@@ -1,40 +1,69 @@
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full">
-      {/* gradient blur */}
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 blur-3xl opacity-40"></div>
-
-      {/* navbar container */}
-      <div className="relative mx-auto mt-4 flex max-w-7xl items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-xl">
-        {/* logo */}
-        <h1 className="text-2xl font-black text-white">
-          Aero<span className="text-cyan-400">Cast</span>
+    <div className="flex justify-center pt-6">
+      <nav
+        className="
+          w-[90%]
+          max-w-6xl
+          flex
+          items-center
+          justify-between
+          px-8
+          py-4
+          rounded-full
+          border
+          border-black/10
+          bg-white/40
+          backdrop-blur-md
+          shadow-md
+        "
+      >
+        <h1
+          className="
+              text-3xl
+              font-black
+              text-black
+              font-sugo
+              tracking-[-0.06em]
+          "
+        >
+          Skenduy
+          <span className="text-orange-500">List</span>
         </h1>
 
-        {/* links */}
-        <div className="hidden gap-8 md:flex">
-          <a href="#" className="text-gray-300 transition hover:text-white">
-            Features
-          </a>
+        <ul className="hidden md:flex gap-8 text-zinc-700 font-medium">
+          <li className="hover:text-orange-500 transition cursor-pointer">
+            Home
+          </li>
 
-          <a href="#" className="text-gray-300 transition hover:text-white">
-            Pricing
-          </a>
+          <li className="hover:text-orange-500 transition cursor-pointer">
+            Discover
+          </li>
 
-          <a href="#" className="text-gray-300 transition hover:text-white">
-            Docs
-          </a>
+          <li className="hover:text-orange-500 transition cursor-pointer">
+            Genres
+          </li>
 
-          <a href="#" className="text-gray-300 transition hover:text-white">
-            Contact
-          </a>
-        </div>
+          <li className="hover:text-orange-500 transition cursor-pointer">
+            About
+          </li>
+        </ul>
 
-        {/* button */}
-        <button className="rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-5 py-2 font-semibold text-white shadow-lg shadow-cyan-500/30 transition hover:scale-105">
-          Get Started
+        <button
+          className="
+            bg-black
+            hover:bg-zinc-800
+            transition
+            px-5
+            py-2
+            rounded-full
+            font-semibold
+            text-white
+          "
+        >
+          Explore
         </button>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }
