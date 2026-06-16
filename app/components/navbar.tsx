@@ -1,6 +1,6 @@
 export default function Navbar() {
   return (
-    <div className="flex justify-center pt-6 sticky top-0 z-50">
+    <div className="flex justify-center pt-6 sticky top-0 z-[9999]">
       <nav
         className="
           w-[90%]

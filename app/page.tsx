@@ -18,6 +18,28 @@ export default function Home() {
           overflow-hidden
         "
       >
+        <div className="mb-12">
+          <input
+            type="text"
+            placeholder="Search artists..."
+            className="
+                w-[500px]
+                max-w-full
+                px-6
+                py-4
+                rounded-full
+                border
+                border-black/10
+                bg-white/70
+                backdrop-blur-md
+                outline-none
+                text-lg
+                shadow-md
+                focus:border-orange-500
+              "
+          />
+        </div>
+
         <AlbumStack />
 
         <p className="uppercase tracking-[0.3em] text-zinc-500 text-sm mt-8 mb-6">
@@ -26,7 +48,7 @@ export default function Home() {
 
         <h1
           className="
-              mt-20
+              mt-48
               text-6xl
               md:text-7xl
               font-black
