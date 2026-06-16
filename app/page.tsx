@@ -1,7 +1,11 @@
+"use client";
+import { useState } from "react";
 import Navbar from "./components/navbar";
 import AlbumStack from "./components/AlbumStack";
 
 export default function Home() {
+  const [search, setSearch] = useState("");
+
   return (
     <main className="min-h-screen bg-[#F5F1E8] text-black">
       <Navbar />
@@ -46,15 +50,19 @@ export default function Home() {
 
           <input
             type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Search artists..."
             className="
-      flex-1
-      bg-transparent
-      outline-none
-      text-black
-      placeholder:text-zinc-500
-    "
+                      flex-1
+                      bg-transparent
+                      outline-none
+                      text-black
+                      placeholder:text-zinc-500
+                    "
           />
+
+          <p className="mt-4 text-zinc-500">Searching: {search}</p>
         </div>
 
         <AlbumStack />
