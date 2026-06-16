@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Navbar from "./components/navbar";
 import AlbumStack from "./components/AlbumStack";
+import SearchBar from "./components/SearchBar";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -22,49 +23,7 @@ export default function Home() {
           overflow-hidden
         "
       >
-        <div
-          className="
-              mb-12
-              flex
-              items-center
-              gap-3
-
-              w-[500px]
-              max-w-full
-
-              px-6
-              py-4
-
-              rounded-full
-
-              bg-white/20
-              backdrop-blur-xl
-
-              border
-              border-white/30
-
-              shadow-[0_8px_32px_rgba(0,0,0,0.08)]
-            "
-        >
-          <span className="text-zinc-500">🔍</span>
-
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search artists..."
-            className="
-                      flex-1
-                      bg-transparent
-                      outline-none
-                      text-black
-                      placeholder:text-zinc-500
-                    "
-          />
-
-          <p className="mt-4 text-zinc-500">Searching: {search}</p>
-        </div>
-
+        <SearchBar search={search} setSearch={setSearch} />
         <AlbumStack search={search} />
 
         <p className="uppercase tracking-[0.3em] text-zinc-500 text-sm mt-8 mb-6">
