@@ -18,25 +18,42 @@ export default function Home() {
           overflow-hidden
         "
       >
-        <div className="mb-12">
+        <div
+          className="
+              mb-12
+              flex
+              items-center
+              gap-3
+
+              w-[500px]
+              max-w-full
+
+              px-6
+              py-4
+
+              rounded-full
+
+              bg-white/20
+              backdrop-blur-xl
+
+              border
+              border-white/30
+
+              shadow-[0_8px_32px_rgba(0,0,0,0.08)]
+            "
+        >
+          <span className="text-zinc-500">🔍</span>
+
           <input
             type="text"
             placeholder="Search artists..."
             className="
-                w-[500px]
-                max-w-full
-                px-6
-                py-4
-                rounded-full
-                border
-                border-black/10
-                bg-white/70
-                backdrop-blur-md
-                outline-none
-                text-lg
-                shadow-md
-                focus:border-orange-500
-              "
+      flex-1
+      bg-transparent
+      outline-none
+      text-black
+      placeholder:text-zinc-500
+    "
           />
         </div>
 
