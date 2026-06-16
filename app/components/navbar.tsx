@@ -45,7 +45,7 @@ export default function Navbar() {
           </li>
 
           <li className="hover:text-orange-500 transition cursor-pointer">
-            Discover
+            Trending
           </li>
 
           <li className="hover:text-orange-500 transition cursor-pointer">
