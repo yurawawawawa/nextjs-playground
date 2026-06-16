@@ -41,6 +41,22 @@ export default function AlbumStack({ search }: { search: string }) {
   const filteredAlbums = albums.filter((album) =>
     album.title.toLowerCase().includes(search.toLowerCase()),
   );
+  if (filteredAlbums.length === 0) {
+    return (
+      <section className="w-full flex justify-center py-20">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-zinc-700">
+            Sorry, there's no such band or album in our archive.
+          </h2>
+
+          <p className="mt-3 text-zinc-500">
+            Try searching for The Adams, Sore, The Panturas, Reality Club, or
+            Jason Ranti.
+          </p>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className="w-full flex justify-center py-20 overflow-hidden">
       <div className="flex items-center justify-center px-10">
