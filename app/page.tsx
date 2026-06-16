@@ -65,7 +65,7 @@ export default function Home() {
           <p className="mt-4 text-zinc-500">Searching: {search}</p>
         </div>
 
-        <AlbumStack />
+        <AlbumStack search={search} />
 
         <p className="uppercase tracking-[0.3em] text-zinc-500 text-sm mt-8 mb-6">
           Indonesian Indie Music Archive

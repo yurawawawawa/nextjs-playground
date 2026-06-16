@@ -37,11 +37,14 @@ const albums = [
   },
 ];
 
-export default function AlbumStack() {
+export default function AlbumStack({ search }: { search: string }) {
+  const filteredAlbums = albums.filter((album) =>
+    album.title.toLowerCase().includes(search.toLowerCase()),
+  );
   return (
     <section className="w-full flex justify-center py-20 overflow-hidden">
       <div className="flex items-center justify-center px-10">
-        {albums.map((album, index) => (
+        {filteredAlbums.map((album, index) => (
           <div
             key={index}
             className={`
