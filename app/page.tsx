@@ -3,6 +3,7 @@ import { useState } from "react";
 import Navbar from "./components/navbar";
 import AlbumStack from "./components/AlbumStack";
 import SearchBar from "./components/SearchBar";
+import Link from "next/link";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -53,20 +54,21 @@ export default function Home() {
         </p>
 
         <div className="flex gap-4 mt-10 mb-20">
-          <button
+          <Link
+            href="/artists"
             className="
-              bg-black
-              text-white
-              hover:bg-zinc-800
-              transition
-              px-6
-              py-3
-              rounded-full
-              font-semibold
-            "
+                    bg-black
+                    text-white
+                    hover:bg-zinc-800
+                    transition
+                    px-6
+                    py-3
+                    rounded-full
+                    font-semibold
+                  "
           >
             Explore Artists
-          </button>
+          </Link>
 
           <button
             className="

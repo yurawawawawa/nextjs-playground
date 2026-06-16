@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <div className="flex justify-center pt-6 sticky top-0 z-[9999]">
@@ -57,21 +59,21 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <button
+        <Link
+          href="/artists"
           className="
-            bg-black/90
-            hover:bg-black
-            transition
-            px-6
-            py-3
-            rounded-full
-            font-semibold
-            text-white
-            shadow-lg
-          "
+                bg-black
+                text-white
+                hover:bg-zinc-800
+                transition
+                px-6
+                py-3
+                rounded-full
+                font-semibold
+              "
         >
           Explore
-        </button>
+        </Link>
       </nav>
     </div>
   );
