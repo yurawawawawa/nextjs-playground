@@ -10,26 +10,31 @@ const artists = [
     name: "The Adams",
     genre: "Indie Pop",
     image: "/adams.jpg",
+    slug: "the-adams",
   },
   {
     name: "Sore",
     genre: "Indie Rock",
     image: "/sore.jpg",
+    slug: "sore",
   },
   {
     name: "The Panturas",
     genre: "Surf Rock",
     image: "/panturas.jpg",
+    slug: "the-panturas",
   },
   {
     name: "Reality Club",
     genre: "Alternative",
     image: "/realityclub.jpg",
+    slug: "reality-club",
   },
   {
     name: "Jason Ranti",
     genre: "Folk",
     image: "/jasonranti.jpg",
+    slug: "jason-ranti",
   },
 ];
 
@@ -69,6 +74,7 @@ export default function ArtistsPage() {
               name={artist.name}
               genre={artist.genre}
               image={artist.image}
+              slug={artist.slug}
             />
           ))}
         </div>
