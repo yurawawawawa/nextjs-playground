@@ -1,4 +1,5 @@
 import Navbar from "../components/navbar";
+import ArtistCard from "../components/ArtistCard";
 
 const artists = [
   {
