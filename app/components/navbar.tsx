@@ -42,10 +42,11 @@ export default function Navbar() {
             font-medium
           "
         >
-          <li className="hover:text-orange-500 transition cursor-pointer">
-            Home
+          <li>
+            <Link href="/" className="hover:text-orange-500 transition">
+              Home
+            </Link>
           </li>
-
           <li className="hover:text-orange-500 transition cursor-pointer">
             Trending
           </li>
