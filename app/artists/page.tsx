@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Navbar from "../components/navbar";
 import ArtistCard from "../components/ArtistCard";
+import SearchBar from "../components/SearchBar";
 
 const artists = [
   {
@@ -30,6 +34,11 @@ const artists = [
 ];
 
 export default function ArtistsPage() {
+  const [search, setSearch] = useState("");
+  const filteredArtists = artists.filter((artist) =>
+    artist.name.toLowerCase().includes(search.toLowerCase()),
+  );
+
   return (
     <main className="min-h-screen bg-[#F5F1E8] text-black">
       <Navbar />
@@ -49,8 +58,12 @@ export default function ArtistsPage() {
           Discover Indonesian indie artists.
         </p>
 
+        <div className="mt-10">
+          <SearchBar search={search} setSearch={setSearch} />
+        </div>
+
         <div className="grid md:grid-cols-3 gap-10 mt-16">
-          {artists.map((artist) => (
+          {filteredArtists.map((artist) => (
             <ArtistCard
               key={artist.name}
               name={artist.name}
