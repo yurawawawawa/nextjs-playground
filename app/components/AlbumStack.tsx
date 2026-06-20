@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const albums = [
   {
@@ -6,6 +7,7 @@ const albums = [
     image: "/sore.jpg",
     rotate: "-rotate-12",
     translate: "translate-y-10",
+    slug: "sore",
   },
 
   {
@@ -13,6 +15,7 @@ const albums = [
     image: "/adams.jpg",
     rotate: "-rotate-6",
     translate: "-translate-y-4",
+    slug: "the-adams",
   },
 
   {
@@ -20,6 +23,7 @@ const albums = [
     image: "/panturas.jpg",
     rotate: "rotate-3",
     translate: "translate-y-6",
+    slug: "the-panturas",
   },
 
   {
@@ -27,6 +31,7 @@ const albums = [
     image: "/realityclub.jpg",
     rotate: "rotate-6",
     translate: "-translate-y-2",
+    slug: "reality-club",
   },
 
   {
@@ -34,6 +39,7 @@ const albums = [
     image: "/jasonranti.jpg",
     rotate: "rotate-12",
     translate: "translate-y-8",
+    slug: "jason-ranti",
   },
 ];
 
@@ -61,7 +67,8 @@ export default function AlbumStack({ search }: { search: string }) {
     <section className="w-full flex justify-center py-20 overflow-hidden">
       <div className="flex items-center justify-center px-10">
         {filteredAlbums.map((album, index) => (
-          <div
+          <Link
+            href={`/artists/${album.slug}`}
             key={index}
             className={`
               relative
@@ -80,6 +87,8 @@ export default function AlbumStack({ search }: { search: string }) {
               hover:z-50
               -mx-4
               float-card
+              cursor-pointer
+              block
             `}
             style={{
               animationDelay: `${index * 0.8}s`,
@@ -91,9 +100,10 @@ export default function AlbumStack({ search }: { search: string }) {
               fill
               className="object-cover"
             />
-          </div>
+          </Link>
         ))}
       </div>
     </section>
   );
 }
+
