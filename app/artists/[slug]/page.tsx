@@ -2,6 +2,7 @@ import { artists } from "@/data/artists";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/components/navbar";
+import ArtistCard from "@/app/components/ArtistCard";
 
 export async function generateMetadata({
   params,
@@ -29,6 +30,13 @@ export default async function ArtistPage({
   const { slug } = await params;
 
   const artist = artists[slug as keyof typeof artists];
+
+  // Get other artists for "You Might Also Like"
+  const allArtists = Object.entries(artists).map(([key, value]) => ({
+    slug: key,
+    ...value,
+  }));
+  const relatedArtists = allArtists.filter((a) => a.slug !== slug).slice(0, 3);
 
   if (!artist) {
     return (
@@ -244,6 +252,24 @@ export default async function ArtistPage({
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Related Artists Section */}
+        <div className="mt-20 pt-16 border-t border-black/5">
+          <h2 className="text-4xl font-black font-sugo tracking-tight text-zinc-900 mb-10">
+            You Might Also Like
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {relatedArtists.map((related) => (
+              <ArtistCard
+                key={related.slug}
+                slug={related.slug}
+                name={related.name}
+                genre={related.genre}
+                image={related.image}
+              />
+            ))}
           </div>
         </div>
       </section>

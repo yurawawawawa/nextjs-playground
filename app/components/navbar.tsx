@@ -20,18 +20,22 @@ export default function Navbar() {
           shadow-[0_8px_32px_rgba(0,0,0,0.08)]
         "
       >
-        <h1
-          className="
-            text-3xl
-            font-black
-            text-black
-            font-sugo
-            tracking-[-0.02em]
-          "
-        >
-          Skenduy
-          <span className="text-orange-500">List</span>
-        </h1>
+        <Link href="/">
+          <h1
+            className="
+              text-3xl
+              font-black
+              text-black
+              font-sugo
+              tracking-[-0.02em]
+              hover:opacity-85
+              transition
+            "
+          >
+            Skenduy
+            <span className="text-orange-500">List</span>
+          </h1>
+        </Link>
 
         <ul
           className="
