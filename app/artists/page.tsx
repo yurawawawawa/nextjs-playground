@@ -1,48 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import ArtistCard from "../components/ArtistCard";
 import SearchBar from "../components/SearchBar";
 
-const artists = [
-  {
-    name: "The Adams",
-    genre: "Indie Pop",
-    image: "/adams.jpg",
-    slug: "the-adams",
-  },
-  {
-    name: "Sore",
-    genre: "Indie Rock",
-    image: "/sore.jpg",
-    slug: "sore",
-  },
-  {
-    name: "The Panturas",
-    genre: "Surf Rock",
-    image: "/panturas.jpg",
-    slug: "the-panturas",
-  },
-  {
-    name: "Reality Club",
-    genre: "Alternative",
-    image: "/realityclub.jpg",
-    slug: "reality-club",
-  },
-  {
-    name: "Jason Ranti",
-    genre: "Folk",
-    image: "/jasonranti.jpg",
-    slug: "jason-ranti",
-  },
-];
+type ArtistSummary = {
+  id: string;
+  name: string;
+  genre: string;
+  image: string;
+  slug: string;
+};
 
 export default function ArtistsPage() {
   const [search, setSearch] = useState("");
-  const filteredArtists = artists.filter((artist) =>
-    artist.name.toLowerCase().includes(search.toLowerCase()),
-  );
+  const [artists, setArtists] = useState<ArtistSummary[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(`/api/artists?search=${encodeURIComponent(search)}`, { signal: controller.signal })
+      .then((response) => response.json())
+      .then((payload: ArtistSummary[]) => setArtists(payload))
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setArtists([]);
+      })
+      .finally(() => setLoading(false));
+    return () => controller.abort();
+  }, [search]);
 
   return (
     <main className="min-h-screen bg-[#F5F1E8] text-black">
@@ -67,10 +54,12 @@ export default function ArtistsPage() {
           <SearchBar search={search} setSearch={setSearch} />
         </div>
 
+        {loading ? <p className="mt-16 text-zinc-500">Loading archive...</p> : null}
+        {!loading && artists.length === 0 ? <p className="mt-16 text-zinc-500">No artists found.</p> : null}
         <div className="grid md:grid-cols-3 gap-10 mt-16">
-          {filteredArtists.map((artist) => (
+          {artists.map((artist) => (
             <ArtistCard
-              key={artist.name}
+              key={artist.id}
               name={artist.name}
               genre={artist.genre}
               image={artist.image}

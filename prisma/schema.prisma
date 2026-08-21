@@ -1,0 +1,52 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Artist {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  genre       String
+  description String
+  image       String
+  city        String   @default("Unknown")
+  activeYears String   @default("2000s")
+  hypeCount   Int      @default(0)
+  isVerified  Boolean  @default(false)
+  albums      Album[]
+  tracks      Track[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Album {
+  id          String   @id @default(uuid())
+  title       String
+  coverUrl    String
+  releaseDate String   @default("")
+  artistId    String
+  artist      Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  tracks      Track[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Track {
+  id              String   @id @default(uuid())
+  title           String
+  audioUrl        String   @default("")
+  durationSeconds Int      @default(180)
+  playCount       Int      @default(0)
+  hypeCount       Int      @default(0)
+  artistId        String
+  artist          Artist   @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  albumId         String?
+  album           Album?   @relation(fields: [albumId], references: [id], onDelete: SetNull)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}

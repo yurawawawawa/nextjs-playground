@@ -1,4 +1,4 @@
-import { artists } from "@/data/artists";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/components/navbar";
@@ -10,7 +10,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const artist = artists[slug as keyof typeof artists];
+  const artist = await prisma.artist.findUnique({
+    where: { slug },
+  });
   if (!artist) {
     return {
       title: "Artist Not Found - SkenduyList",
@@ -29,14 +31,29 @@ export default async function ArtistPage({
 }) {
   const { slug } = await params;
 
-  const artist = artists[slug as keyof typeof artists];
+  const artist = await prisma.artist.findUnique({
+    where: { slug },
+    include: {
+      albums: {
+        orderBy: {
+          releaseDate: "asc",
+        },
+      },
+      tracks: {
+        orderBy: {
+          title: "asc",
+        },
+      },
+    },
+  });
 
   // Get other artists for "You Might Also Like"
-  const allArtists = Object.entries(artists).map(([key, value]) => ({
-    slug: key,
-    ...value,
-  }));
-  const relatedArtists = allArtists.filter((a) => a.slug !== slug).slice(0, 3);
+  const relatedArtists = await prisma.artist.findMany({
+    where: {
+      slug: { not: slug },
+    },
+    take: 3,
+  });
 
   if (!artist) {
     return (
@@ -166,7 +183,7 @@ export default async function ArtistPage({
               <div className="grid sm:grid-cols-2 gap-4">
                 {artist.albums.map((album) => (
                   <div
-                    key={album}
+                    key={album.id}
                     className="
                       flex
                       items-center
@@ -187,7 +204,7 @@ export default async function ArtistPage({
                     </div>
                     <div>
                       <h3 className="font-bold text-zinc-800 text-base leading-tight">
-                        {album}
+                        {album.title} {album.releaseDate ? `(${album.releaseDate})` : ""}
                       </h3>
                       <p className="text-xs text-zinc-500 mt-0.5">Studio Album</p>
                     </div>
@@ -206,7 +223,7 @@ export default async function ArtistPage({
             <div className="space-y-3">
               {artist.tracks.map((track, i) => (
                 <div
-                  key={track}
+                  key={track.id}
                   className="
                     flex
                     items-center
@@ -227,7 +244,7 @@ export default async function ArtistPage({
                       {(i + 1).toString().padStart(2, "0")}
                     </span>
                     <span className="font-bold text-zinc-800 group-hover:text-orange-500 transition duration-300">
-                      {track}
+                      {track.title}
                     </span>
                   </div>
                   <span
